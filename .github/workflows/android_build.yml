@@ -9,9 +9,6 @@ on:
 jobs:
   build-android:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./DriveOS
 
     steps:
       - uses: actions/checkout@v3
@@ -27,11 +24,11 @@ jobs:
         run: npm ci
 
       - name: Build Android Release APK
-        working-directory: ./DriveOS/android
+        working-directory: ./android
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: DriveOS/android/app/build/outputs/apk/release/app-release.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
